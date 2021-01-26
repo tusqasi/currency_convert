@@ -2,7 +2,6 @@ from datetime import date
 from os import path
 import requests
 import json
-# api url = 'https://api.exchangeratesapi.io/latest'
 
 def make_cache(base='USD', cache_name='cache.json'):
     # now = date.today()
@@ -16,11 +15,9 @@ def read_cache(cache_name='cache.json'):
     if path.exists(f"./{cache_name}"):
         with open(cache_name,'r') as f:
             cached_response = json.load(f)
-            cached_date = date(*cached_response['date'].split('-',2))
+            cached_date = date(*cached_response['date'].split('-',1))
             if (now - cached_date).days > 2:
                 make_cache(cache_name=cache_name)
             else:
                 return cached_response
-            
-if __name__ == '__main__':
-    make_cache()
+    
