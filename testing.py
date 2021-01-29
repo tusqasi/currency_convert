@@ -10,8 +10,8 @@ def main():
 
     rates = get_rate()['rates']
 
-    base_rate = rates[base_cur]
-    target_rate = rates[target_cur]
+    base_rate = rates[base_cur.upper()]
+    target_rate = rates[target_cur.upper()]
     final = amt / base_rate * target_rate
     print(final)
 
