@@ -15,9 +15,8 @@ def read_cache(cache_name='cache.json'):
     if path.exists(f"./{cache_name}"):
         with open(cache_name,'r') as f:
             cached_response = json.load(f)
-            cached_date = date(*cached_response['date'].split('-',1))
+            cached_date = date(*[int(x) for x in cached_response['date'].split('-',2)])
             if (now - cached_date).days > 2:
-                make_cache(cache_name=cache_name)
+                return [0]
             else:
-                return cached_response
-    
+                return [1, cached_response]
