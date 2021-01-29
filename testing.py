@@ -13,7 +13,7 @@ def main():
     base_rate = rates[base_cur.upper()]
     target_rate = rates[target_cur.upper()]
     final = amt / base_rate * target_rate
-    print(final)
+    print(round(final, 4 ), target_cur)
 
 if __name__ == '__main__':
     main()
