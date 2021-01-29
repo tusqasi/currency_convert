@@ -3,6 +3,13 @@ from os import path
 import requests
 import json
 
+def get_rate():
+    if read_cache()[0]:
+        response = read_cache()[1]
+    else:
+        response = make_cache()
+    return response
+
 def make_cache(base='USD', cache_name='cache.json'):
     # now = date.today()
     # now.strftime("%m-%d-%y")
