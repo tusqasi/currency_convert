@@ -7,7 +7,8 @@ def get_rate():
     if read_cache()[0]:
         response = read_cache()[1]
     else:
-        response = make_cache()
+        make_cache()
+        get_rate()
     return response
 
 def make_cache(base='', cache_name='cache.json'):
@@ -17,7 +18,6 @@ def make_cache(base='', cache_name='cache.json'):
     response['time'] = time.time()
     with open(cache_name, 'w') as f:
         json.dump(response, f)
-    return response
 
 def read_cache(cache_name='cache.json'):
     now = time.time()
