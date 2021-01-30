@@ -17,6 +17,7 @@ def make_cache(base='', cache_name='cache.json'):
     response['time'] = time.time()
     with open(cache_name, 'w') as f:
         json.dump(response, f)
+    return response
 
 def read_cache(cache_name='cache.json'):
     now = time.time()
