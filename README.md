@@ -1,6 +1,6 @@
-# currency convert
+# Currency Convert
 
-A simple python application which leverages [this](https://exchangeratesapi.io) api.
+A simple python application which leverages [this](https://exchangeratesapi.io) api to convert between currencies with real exchange rates. 
 
 ## Usage
 
@@ -14,3 +14,4 @@ eg. To convert 500 JPY to CAD use this:
 ```
 python curconv.py 500 jpy cad
 ```
+
