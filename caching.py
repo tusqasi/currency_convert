@@ -14,7 +14,14 @@ def get_rate():
 def make_cache(base='', cache_name='cache.json'):
     # now = date.today()
     # now.strftime("%m-%d-%y")
-    response = requests.get(f'https://api.exchangeratesapi.io/latest?base={base}').json() 
+    
+    response = requests.get(f'https://api.exchangeratesapi.io/latest?base={base}')
+    
+    if respone.status_code != 200:
+        raise ApiError(f'Some Error')
+     
+    response = response.json() 
+
     response['time'] = time.time()
     with open(cache_name, 'w') as f:
         json.dump(response, f)
