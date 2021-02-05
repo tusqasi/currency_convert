@@ -8,8 +8,8 @@ def offline():
         requests.get("https://duckduckgo.com")        
     except requests.ConnectionError:
         print("offline")
-        return 1
-    return 0
+        return True
+    return False
 
 def get_rate():
     if read_cache()[0]:
@@ -25,7 +25,7 @@ def make_cache(base='', cache_name='cache.json'):
     
     response = requests.get(f'https://api.exchangeratesapi.io/latest?base={base}')
     
-    if respone.status_code != 200:
+    if response.status_code != 200:
         raise ApiError(f'Some Error')
      
     response = response.json() 
@@ -41,11 +41,11 @@ def read_cache(cache_name='cache.json'):
             cached_response = json.load(f)
             cached_time = cached_response['time']
             if offline():
-                return [1, cached_response]        
+                return [True, cached_response]        
             elif now - cached_time > 3600:
-                return [0]
+                return [False]
             else:
-                return [1, cached_response]
+                return [True, cached_response]
     else:
         make_cache()
         read_cache()
