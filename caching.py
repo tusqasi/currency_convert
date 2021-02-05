@@ -3,6 +3,14 @@ import time
 import requests
 import json
 
+def offline():
+    try:
+        requests.get("https://duckduckgo.com")        
+    except requests.ConnectionError:
+        print("offline")
+        return 1
+    return 0
+
 def get_rate():
     if read_cache()[0]:
         response = read_cache()[1]
@@ -32,7 +40,9 @@ def read_cache(cache_name='cache.json'):
         with open(cache_name,'r') as f:
             cached_response = json.load(f)
             cached_time = cached_response['time']
-            if now - cached_time > 3600:
+            if offline():
+                return [1, cached_response]        
+            elif now - cached_time > 3600:
                 return [0]
             else:
                 return [1, cached_response]
